@@ -1,1 +1,1 @@
-## This is the Frontend Repository for DockEX 
+## This is the Client Repository for DockEX 
