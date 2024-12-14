@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for fetching VM Code from github and performing CRUD Operations",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DockEX/Frontend.git"
+  },
+  "author": "Keval Juthani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DockEX/Frontend/issues"
+  },
+  "homepage": "https://github.com/DockEX/Frontend#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "simple-git": "^3.27.0"
+  }
+}
