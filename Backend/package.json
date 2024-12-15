@@ -4,7 +4,7 @@
   "description": "Backend for fetching VM Code from github and performing CRUD Operations",
   "main": "server.js",
   "scripts": {
-    "test": "npm start"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "nodemon": "^3.1.9",
     "simple-git": "^3.27.0"
   }
 }
