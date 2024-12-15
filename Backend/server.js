@@ -10,21 +10,22 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = 5000;
+const DEFAULT_SAVE_PATH = path.resolve(__dirname, 'repositories');
 
 app.post('/api/fetch-repo', async (req, res) => {
-    const { username, repository, targetPath } = req.body;
+    const { username, repository } = req.body;
 
-    if (!username || !repository || !targetPath) {
-        return res.status(400).json({ error: 'Username, repository name, and target path are required' });
+    if (!username || !repository) {
+        return res.status(400).json({ error: 'Username and repository name are required' });
     }
 
     const repoUrl = `https://github.com/${username}/${repository}.git`;
-    const targetDirectory = path.resolve(targetPath);
+    const targetDirectory = path.join(DEFAULT_SAVE_PATH, repository);
 
-    // Ensure the target directory exists
+    // Ensure the default save directory exists
     try {
-        if (!fs.existsSync(targetDirectory)) {
-            fs.mkdirSync(targetDirectory, { recursive: true });
+        if (!fs.existsSync(DEFAULT_SAVE_PATH)) {
+            fs.mkdirSync(DEFAULT_SAVE_PATH, { recursive: true });
         }
 
         // Clone the repository using simple-git

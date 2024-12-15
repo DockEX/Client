@@ -4,7 +4,6 @@ import axios from "axios";
 const FetchRepoForm = () => {
   const [username, setUsername] = useState("");
   const [repository, setRepository] = useState("");
-  const [targetPath, setTargetPath] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -14,7 +13,6 @@ const FetchRepoForm = () => {
       const response = await axios.post("http://localhost:5000/api/fetch-repo", {
         username,
         repository,
-        targetPath,
       });
       setResponseMessage(response.data.message);
     } catch (error) {
@@ -43,15 +41,6 @@ const FetchRepoForm = () => {
             type="text"
             value={repository}
             onChange={(e) => setRepository(e.target.value)}
-            required
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label>Target Path:</label>
-          <input
-            type="text"
-            value={targetPath}
-            onChange={(e) => setTargetPath(e.target.value)}
             required
           />
         </div>
