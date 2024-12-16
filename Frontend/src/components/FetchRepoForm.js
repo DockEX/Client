@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const FetchRepoForm = () => {
+<<<<<<< HEAD
 const [username, setUsername] = useState("");
 const [repository, setRepository] = useState("");
 const [responseMessage, setResponseMessage] = useState("");
 const [vmIP, setVmIP] = useState(""); 
+=======
+  const [username, setUsername] = useState("");
+  const [repository, setRepository] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+>>>>>>> 9b608d1b155cd1f62b6827b8871d3ca8c53a444f
 
 const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,6 +19,7 @@ const handleSubmit = async (e) => {
     setResponseMessage("Creating VM... Booting up VM... Fetching VM IP...");
     
     try {
+<<<<<<< HEAD
         const response = await axios.post("http://localhost:5000/createvm", {
             username,
             repository,
@@ -25,6 +32,13 @@ const handleSubmit = async (e) => {
         } else {
             setResponseMessage('Failed to create VM.');
         }
+=======
+      const response = await axios.post("http://localhost:5000/api/fetch-repo", {
+        username,
+        repository,
+      });
+      setResponseMessage(response.data.message);
+>>>>>>> 9b608d1b155cd1f62b6827b8871d3ca8c53a444f
     } catch (error) {
         console.error('Error during VM creation:', error.message);
         setResponseMessage('Creating VM... Booting up VM... Fetching VM IP...');
