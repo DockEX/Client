@@ -2,27 +2,34 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const FetchRepoForm = () => {
-  const [username, setUsername] = useState("");
-  const [repository, setRepository] = useState("");
-  const [targetPath, setTargetPath] = useState("");
-  const [responseMessage, setResponseMessage] = useState("");
+const [username, setUsername] = useState("");
+const [repository, setRepository] = useState("");
+const [responseMessage, setResponseMessage] = useState("");
+const [vmIP, setVmIP] = useState(""); 
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setResponseMessage("Creating VM... Booting up VM... Fetching VM IP...");
+    
     try {
-      const response = await axios.post("http://localhost:5000/api/fetch-repo", {
-        username,
-        repository,
-        targetPath,
-      });
-      setResponseMessage(response.data.message);
+        const response = await axios.post("http://localhost:5000/createvm", {
+            username,
+            repository,
+        });
+        console.log("Frontend: ",response);
+        
+        if (response.data.vmIP) {
+            setVmIP(response.data.vmIP); // Store the VM IP
+            setResponseMessage(`VM Created! IP Address: ${response.data.vmIP}`);
+        } else {
+            setResponseMessage('Failed to create VM.');
+        }
     } catch (error) {
-      setResponseMessage(
-        error.response?.data?.error || "Something went wrong. Please try again."
-      );
+        console.error('Error during VM creation:', error.message);
+        setResponseMessage('Creating VM... Booting up VM... Fetching VM IP...');
     }
-  };
+};
 
   return (
     <div style={styles.container}>
@@ -43,15 +50,6 @@ const FetchRepoForm = () => {
             type="text"
             value={repository}
             onChange={(e) => setRepository(e.target.value)}
-            required
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label>Target Path:</label>
-          <input
-            type="text"
-            value={targetPath}
-            onChange={(e) => setTargetPath(e.target.value)}
             required
           />
         </div>
